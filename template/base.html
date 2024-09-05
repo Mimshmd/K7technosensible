@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ SITENAME }}</title>
+    {{ css() }} <!-- Inclure les CSS -->
+</head>
+<body>
+    <div class="container">
+        <!-- Colonne gauche (sidebar) -->
+        <div class="left-sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="{{ SITEURL }}/about.html">À propos</a></li>
+                <li><a href="{{ SITEURL }}/lab.html">Lab</a></li>
+                <li><a href="{{ SITEURL }}/media.html">Media</a></li>
+                <li><a href="{{ SITEURL }}/studio.html">Studio</a></li>
+            </ul>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="main-content">
+            {{ content }} <!-- Contenu principal injecté ici -->
+        </div>
+    </div>
+    {{ scripts() }} <!-- Inclure les scripts -->
+</body>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ SITENAME }}</title>
+    <link rel="stylesheet" href="{{ SITEURL }}/static/css/custom.css">
+</head>
+
