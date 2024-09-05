@@ -4,32 +4,30 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # Version la plus récente recommandée
+    - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4  # Version la plus récente recommandée
-        with:
-          python-version: '3.x'
+    # Configurer Python et créer un environnement virtuel
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12.5'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install jekyll
+    - name: Install Python dependencies
+      run: |
+        python -m venv myenv  # Crée l'environnement virtuel
+        source myenv/bin/activate  # Active l'environnement virtuel
+        pip install -r requirements.txt  # Installe les dépendances Python nécessaires
 
-      - name: Build site
-        run: |
-          jekyll build
+    # Construire et déployer avec Jekyll
+    - name: Install Jekyll dependencies
+      run: |
+        bundle install  # Installe les dépendances Jekyll
+        bundle exec jekyll build  # Génère le site avec Jekyll
 
-      - name: Deploy
-        run: |
-          # Ajoutez ici les commandes pour déployer votre site
+    # Exécuter des étapes supplémentaires si nécessaire
