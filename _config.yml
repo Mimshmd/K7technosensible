@@ -15,6 +15,13 @@ plugins:
   - jekyll-default-layout
   - jekyll-titles-from-headings
 
+  theme: jekyll-theme-primer
+gems:
+  - jekyll-github-metadata
+  - jekyll-seo-tag
+  # autres plugins...
+
+
 # Configuration Python (ajoutez cette ligne si nécessaire)
 python:
   - python3

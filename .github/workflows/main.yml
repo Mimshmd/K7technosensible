@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build Pelican site
 
 on:
   push:
@@ -10,24 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    # Configurer Python et créer un environnement virtuel
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12.5'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-    - name: Install Python dependencies
-      run: |
-        python -m venv myenv  # Crée l'environnement virtuel
-        source myenv/bin/activate  # Active l'environnement virtuel
-        pip install -r requirements.txt  # Installe les dépendances Python nécessaires
+      - name: Install dependencies
+        run: |
+          python -m venv myenv
+          source myenv/bin/activate
+          pip install pelican markdown
 
-    # Construire et déployer avec Jekyll
-    - name: Install Jekyll dependencies
-      run: |
-        bundle install  # Installe les dépendances Jekyll
-        bundle exec jekyll build  # Génère le site avec Jekyll
+      - name: Build Pelican site
+        run: |
+          source myenv/bin/activate
+          pelican content -o output -s pelicanconf.py
 
-    # Exécuter des étapes supplémentaires si nécessaire
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
