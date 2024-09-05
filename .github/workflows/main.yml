@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Met à jour vers v3
+        uses: actions/checkout@v3  # Version la plus récente recommandée
 
       - name: Set up Python
-        uses: actions/setup-python@v4  # Version stable la plus récente
+        uses: actions/setup-python@v4  # Version la plus récente recommandée
         with:
           python-version: '3.x'
 
@@ -32,5 +32,4 @@ jobs:
 
       - name: Deploy
         run: |
-          # Ajoutez ici les commandes pour déployer votre site, par exemple :
-          # gh-pages -d _site
+          # Ajoutez ici les commandes pour déployer votre site
