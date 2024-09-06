@@ -9,15 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
       
-    - name: List files before build
-      run: ls -al
+    - name: Check if requirements.txt exists
+      run: |
+        if [ ! -f "requirements.txt" ]; then
+          echo "requirements.txt not found, aborting."
+          exit 1
+        fi
 
     - name: Install dependencies
       run: |
@@ -33,14 +37,6 @@ jobs:
       run: |
         source env/bin/activate
         pelican content -o output -s publishconf.py
-      continue-on-error: true
-
-    - name: Check build failure
-      if: failure()
-      run: |
-        echo "Pelican build failed. Checking content..."
-        ls -al
-        ls -al output
 
     - name: Check output folder
       run: |
@@ -48,7 +44,7 @@ jobs:
         ls -al output
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
