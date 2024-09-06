@@ -23,4 +23,7 @@ DELETE_OUTPUT_DIRECTORY = True
 SITEURL = 'https://mimshmd.github.io/K7technosensible'
 RELATIVE_URLS = False
 
+IGNORE_FILES = ['myenv/*']
+
+
 # Autres configurations Pelican
