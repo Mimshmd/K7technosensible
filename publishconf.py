@@ -20,3 +20,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # DISQUS_SITENAME = ""
 # GOOGLE_ANALYTICS = ""
+SITEURL = 'https://mimshmd.github.io/K7technosensible'
+RELATIVE_URLS = False
+
+# Autres configurations Pelican
