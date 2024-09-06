@@ -48,14 +48,13 @@ jobs:
         echo "Checking contents of output folder after Pelican build..."
         ls -al output
 
+    - name: Remove Pelican tests
+      run: |
+        rm -rf ./myenv/lib/python3.12/site-packages/pelican/tests/
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
         force_orphan: true
-
-  - name: Remove Pelican tests
-  run: |
-    rm -rf ./myenv/lib/python3.12/site-packages/pelican/tests/
-
