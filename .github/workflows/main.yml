@@ -48,22 +48,16 @@ jobs:
         echo "Checking contents of the root folder after Pelican build..."
         ls -al .
 
-    - name: Archive artifact
+    - name: Prepare artifact
       run: |
-        tar --exclude='./myenv' --ignore-failed-read --exclude-vcs-ignores -czf artifact.tar.gz .
-
-    - name: Check if artifact exists
-      run: |
-        if [ ! -f "artifact.tar.gz" ]; then
-          echo "Artifact not found!"
-          exit 1
-        fi
+        mkdir artifact_dir
+        cp -r * artifact_dir  # Copier tous les fichiers dans un répertoire temporaire
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: build-artifact
-        path: artifact.tar.gz
+        path: artifact_dir
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
