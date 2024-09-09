@@ -45,6 +45,10 @@ jobs:
 
     - name: Check output folder
       run: |
+        if [ ! -d "output" ]; then
+          echo "Output folder not found!"
+          exit 1
+        fi
         echo "Checking contents of output folder after Pelican build..."
         ls -al output
 
@@ -56,9 +60,15 @@ jobs:
       run: |
         tar --exclude='./myenv' --ignore-failed-read -czf artifact.tar.gz output
 
+    - name: Check if artifact exists
+      run: |
+        if [ ! -f "artifact.tar.gz" ]; then
+          echo "Artifact not found!"
+          exit 1
+        fi
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifact
         path: artifact.tar.gz
@@ -69,5 +79,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
         force_orphan: true
-
-
