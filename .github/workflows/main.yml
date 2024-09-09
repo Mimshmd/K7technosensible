@@ -54,7 +54,8 @@ jobs:
 
     - name: Archive artifact
       run: |
-        tar --exclude='./myenv' --warning=no-file-changed -czf artifact.tar.gz .
+        tar --exclude='./myenv' --ignore-failed-read -czf artifact.tar.gz output
+
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
