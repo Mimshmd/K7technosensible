@@ -51,7 +51,7 @@ jobs:
     - name: Prepare artifact
       run: |
         mkdir artifact_dir
-        cp -r * artifact_dir  # Copier tous les fichiers dans un répertoire temporaire
+        find . -mindepth 1 -maxdepth 1 ! -name artifact_dir ! -name myenv -exec cp -r {} artifact_dir/ \;
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
