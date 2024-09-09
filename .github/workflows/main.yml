@@ -48,16 +48,23 @@ jobs:
         echo "Checking contents of the root folder after Pelican build..."
         ls -al .
 
-    - name: Prepare artifact
+    - name: Debugging - List files in root
       run: |
-        mkdir artifact_dir
-        find . -mindepth 1 -maxdepth 1 ! -name artifact_dir ! -name myenv -exec cp -r {} artifact_dir/ \;
+        echo "Listing all files and directories at the root before archiving:"
+        find . -type f
+
+    - name: Pause before archiving
+      run: sleep 5
+
+    - name: Archive artifact
+      run: |
+        tar --exclude='./myenv' --ignore-failed-read --exclude-vcs-ignores -czf artifact.tar.gz *.html *.css *.js
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: build-artifact
-        path: artifact_dir
+        path: artifact.tar.gz
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
