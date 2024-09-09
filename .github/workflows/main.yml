@@ -50,7 +50,7 @@ jobs:
 
     - name: Archive artifact
       run: |
-        tar --exclude='./myenv' --exclude-vcs-ignores --warning=no-file-changed -czf artifact.tar.gz .
+        tar --exclude='./myenv' --ignore-failed-read --exclude-vcs-ignores -czf artifact.tar.gz .
 
     - name: Check if artifact exists
       run: |
