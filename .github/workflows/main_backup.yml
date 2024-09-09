@@ -1,9 +1,13 @@
 name: Build and Deploy Pelican Site
 
 on:
-  push:
-    branches:
-      - main
+  # Désactivation temporaire du déclenchement automatique par push
+  # push:
+  #   branches:
+  #     - main
+
+  # Ajout de 'workflow_dispatch' pour permettre un déclenchement manuel
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -48,7 +52,6 @@ jobs:
         echo "Checking contents of the root folder after Pelican build..."
         ls -al .
 
-    # Ajout de la commande pour vider le cache
     - name: Clear GitHub Actions Cache
       run: |
         rm -rf ${{ runner.temp }}/*
