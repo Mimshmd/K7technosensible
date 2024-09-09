@@ -48,9 +48,9 @@ jobs:
         echo "Checking contents of the root folder after Pelican build..."
         ls -al .
 
-    - name: Prepare artifact with rsync
+    - name: Sync files to artifact directory
       run: |
-        mkdir artifact_dir
+        mkdir -p artifact_dir
         rsync -av --exclude './myenv' --exclude './artifact_dir' --exclude '.git' --exclude 'venv' ./ artifact_dir/
 
     - name: Upload artifact
