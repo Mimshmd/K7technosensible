@@ -41,41 +41,27 @@ jobs:
     - name: Build Pelican site
       run: |
         source env/bin/activate
-        pelican content -o output -s publishconf.py
+        pelican content -s publishconf.py
 
-    - name: Check output folder
+    - name: Check root folder
       run: |
-        if [ ! -d "output" ]; then
-          echo "Output folder not found!"
-          exit 1
-        fi
-        echo "Checking contents of output folder after Pelican build..."
-        ls -al output
+        echo "Checking contents of the root folder after Pelican build..."
+        ls -al .
 
-    - name: Remove Pelican tests
+    - name: Prepare artifact with rsync
       run: |
-        rm -rf ./myenv/lib/python3.12/site-packages/pelican/tests/
-
-    - name: Archive artifact
-      run: |
-        tar --exclude='./myenv' --ignore-failed-read -czf artifact.tar.gz output
-
-    - name: Check if artifact exists
-      run: |
-        if [ ! -f "artifact.tar.gz" ]; then
-          echo "Artifact not found!"
-          exit 1
-        fi
+        mkdir artifact_dir
+        rsync -av --exclude './myenv' --exclude './artifact_dir' --exclude '.git' --exclude 'venv' ./ artifact_dir/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: build-artifact
-        path: artifact.tar.gz
+        path: artifact_dir
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./output
+        publish_dir: ./  # Publie directement depuis la racine
         force_orphan: true
