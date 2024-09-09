@@ -48,6 +48,12 @@ jobs:
         echo "Checking contents of the root folder after Pelican build..."
         ls -al .
 
+    # Ajout de la commande pour vider le cache
+    - name: Clear GitHub Actions Cache
+      run: |
+        rm -rf ${{ runner.temp }}/*
+        rm -rf ${{ runner.tool_cache }}/*
+
     - name: Sync files to artifact directory
       run: |
         mkdir -p artifact_dir
