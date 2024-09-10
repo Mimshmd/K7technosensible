@@ -34,6 +34,7 @@ SOCIAL = (
     ("Twitter", "https://twitter.com/yourprofile"),
     ("GitHub", "https://github.com/yourprofile"),
 )
+SITEURL = ''
 
 MARKDOWN = {
     'extensions': [
