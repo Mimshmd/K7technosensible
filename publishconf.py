@@ -8,7 +8,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
-SITEURL = ""
+SITEURL = 'https://mimshmd.github.io/K7technosensible'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = "feeds/all.atom.xml"
@@ -20,10 +20,8 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # DISQUS_SITENAME = ""
 # GOOGLE_ANALYTICS = ""
-SITEURL = 'https://mimshmd.github.io/K7technosensible'
-RELATIVE_URLS = False
 
+# Ignore specific files or folders
 IGNORE_FILES = ['myenv/*']
-
 
 # Autres configurations Pelican
