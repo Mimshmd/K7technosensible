@@ -17,6 +17,11 @@ AUTHOR_FEED_RSS = None
 OUTPUT_PATH = "output/"
 
 STATIC_PATHS = ['images', 'audio']
+# EXTRA_PATH_METADATA = {
+#     'extra/custom.css': {'path': 'theme/css/custom.css'},
+#     'extra/main.css': {'path': 'theme/css/main.css'},
+# }
+
 
 DEFAULT_SORT_BY = 'date'
 
@@ -47,4 +52,9 @@ MARKDOWN = {
 }
 
 DEFAULT_PAGINATION = False
+
+THEME = 'theme/notmyidea-cms'
+
+CUSTOM_CSS = 'notmyidea-cms/static/css/main.css'
+DISPLAY_CATEGORIES_ON_MENU = True
 
