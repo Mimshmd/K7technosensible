@@ -318,41 +318,6 @@ text-shadow: none;
 
 /* Main Nav */
 
-/* Style for the category menu Zozo */
-nav .category-menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Align items horizontally */
-}
-
-nav .category-menu li {
-    margin-right: 20px; /* Spacing between menu items */
-}
-
-nav .category-menu li a {
-    text-decoration: none;
-    color: #cf55ff; /* Set link color */
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-nav .category-menu li a:hover {
-    background-color: #000000; /* Background color on hover */
-    color: #cf55ff; /* Text color on hover */
-}
-
-/* Active category styling (if needed) */
-nav .category-menu li.active a {
-    background-color: #000000; /* Different background for active link */
-    color: #e3b9f4;
-}
-
-/* End category styling Zozo */
-
 #banner nav {
 
 background: #000305;

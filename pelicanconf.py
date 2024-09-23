@@ -1,6 +1,6 @@
 AUTHOR = 'Myriam Hammad'
 SITENAME = 'K7 technosensible'
-SITEURL = ''
+SITEURL = 'http://127.0.0.1:8000'
 PATH = 'content'
 TIMEZONE = 'Europe/Paris'
 
