@@ -16,7 +16,8 @@ AUTHOR_FEED_RSS = None
 
 OUTPUT_PATH = "output/"
 
-STATIC_PATHS = ['images', 'audio']
+STATIC_PATHS = ['images', 'audio', 'css']
+
 
 DEFAULT_SORT_BY = 'date'
 
