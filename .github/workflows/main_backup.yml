@@ -12,30 +12,43 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4  # Mettre à jour vers v4
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v5  # Mettre à jour vers v5
       with:
         python-version: '3.x'
 
+    - name: Check if requirements.txt exists
+      run: |
+        if [ ! -f "requirements.txt" ]; then
+          echo "requirements.txt not found, aborting."
+          exit 1
+        fi
+
     - name: Install dependencies
       run: |
+        echo "Setting up virtual environment"
         python -m venv env
+        echo "Activating virtual environment"
         source env/bin/activate
+        echo "Installing dependencies from requirements.txt"
         pip install -r requirements.txt
+        echo "Dependencies installed successfully."
 
     - name: Build Pelican site
       run: |
         source env/bin/activate
         pelican content -s publishconf.py
 
-    - name: Check output folder
-      run: ls -al output
+    - name: Configure Git
+      run: |
+        git config --global user.email "your-email@example.com"
+        git config --global user.name "Your Name"
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: output  # Assurez-vous que `output` est correct
+        publish_dir: output
         force_orphan: true
